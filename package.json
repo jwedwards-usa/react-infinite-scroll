@@ -2,7 +2,7 @@
   "name": "react-infinite-scroll",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://jwedwards-usa.github.io/react-infinite-scroll",
+  "homepage": "https://jwedwards-usa.github.io/react-infinite-scroll/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
