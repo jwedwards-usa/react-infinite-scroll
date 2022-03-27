@@ -8,17 +8,22 @@ import fourthIntroImage from './images/four.jpg'
 
 const postImgStyle = {
   width: '100%',
-  height: '100%'
+  height: '100%',
+  margin: '0',
+  padding: '0',
+  borderRadius: '14px'
 }
 
 const postDivStyle = {
   color: 'blue',
-  height: '150px',
-  width: '400px',
+  //height: '150px',
+  //width: '400px',
   textAlign: 'center',
-  padding: '5px 10px',
-  background: '#eee',
-  marginTop: '15px',
+  padding: '5px',
+  paddingBottom: '0px',
+  background: '#383838',
+  marginTop: '14px',
+  marginBottom: '5px'
 }
 
 const containerStyle = {
