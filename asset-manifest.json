@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-infinite-scroll/static/css/main.073c9b0a.css",
-    "main.js": "/react-infinite-scroll/static/js/main.27012c4c.js",
+    "main.js": "/react-infinite-scroll/static/js/main.91f709b1.js",
     "static/js/787.fbef6b5f.chunk.js": "/react-infinite-scroll/static/js/787.fbef6b5f.chunk.js",
     "static/media/four.jpg": "/react-infinite-scroll/static/media/four.60d0975735dcb1b412af.jpg",
     "static/media/three.jpg": "/react-infinite-scroll/static/media/three.ebfd2beeaf29cf7e1c22.jpg",
@@ -9,11 +9,11 @@
     "static/media/two.jpg": "/react-infinite-scroll/static/media/two.7d24bda70e380092fafa.jpg",
     "index.html": "/react-infinite-scroll/index.html",
     "main.073c9b0a.css.map": "/react-infinite-scroll/static/css/main.073c9b0a.css.map",
-    "main.27012c4c.js.map": "/react-infinite-scroll/static/js/main.27012c4c.js.map",
+    "main.91f709b1.js.map": "/react-infinite-scroll/static/js/main.91f709b1.js.map",
     "787.fbef6b5f.chunk.js.map": "/react-infinite-scroll/static/js/787.fbef6b5f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.27012c4c.js"
+    "static/js/main.91f709b1.js"
   ]
 }
