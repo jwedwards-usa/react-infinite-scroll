@@ -1,7 +1,7 @@
 const imageSources = [
   {
     urlPrefix: 'https://picsum.photos/id/',
-    urlPostFix: '/1100/400?blur=5',
+    urlPostFix: '/1100/400',//?blur=5',
     minRandom: 0,
     maxRandom: 1084,
     ignore: [86, 97, 226, 205, 286, 761, 138, 303, 245, 333, 394, 462, 624, 697, 636, 644,

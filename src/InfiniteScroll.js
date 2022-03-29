@@ -11,7 +11,8 @@ const postImgStyle = {
   height: '100%',
   margin: '0',
   padding: '0',
-  borderRadius: '14px'
+  borderRadius: '14px',
+  filter: 'blur(2px)'
 }
 
 const postDivStyle = {
@@ -27,7 +28,7 @@ const postDivStyle = {
 }
 
 const containerStyle = {
-  maxWidth: '1280px',
+  maxWidth: '1100px',
   margin: '0 auto',
 }
 
