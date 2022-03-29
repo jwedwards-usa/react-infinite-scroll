@@ -3,6 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import * as FullStory from '@fullstory/browser';
+
+FullStory.init({ 
+  orgId: '19A4RH',
+  debug: false,
+  host: 'fullstory.com',
+  script: 'edge.fullstory.com/s/fs.js',
+  namespace: 'FS'
+});
 
 ReactDOM.render(
   <React.StrictMode>
