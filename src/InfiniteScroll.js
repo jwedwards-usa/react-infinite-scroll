@@ -40,6 +40,10 @@ function generateCanvas() {
     imgSource.ignore.includes(imgUrlLocator)) {
     imgUrlLocator = getRandomIntInclusive(imgSource.minRandom, imgSource.maxRandom)
   }
+  const mediaQuery = window.matchMedia( '( min-width: 768px )' ) 
+  if(!mediaQuery.matches){
+    return imgSource.urlPrefix + imgUrlLocator + imgSource.squareUrlPostFix
+  }
   return imgSource.urlPrefix + imgUrlLocator + imgSource.urlPostFix
 }
 
@@ -49,13 +53,16 @@ export function InfiniteScroll() {
   const [page, setPage] = useState(1)
   // add loader reference
   const loader = useRef(null)
+
   // here we handle what happens when user scrolls to Load More div
   // in this case we just update page variable
+  //@todo move this inside the useEffect function
   const handleObserver = (entities) => {
     const target = entities[0]
     if (target.isIntersecting) {
       setPage(_page => _page + 1)
     }
+    //@todo implement observer.unobserve
   }
 
   useEffect(() => {
