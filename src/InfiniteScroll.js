@@ -75,16 +75,16 @@ export function InfiniteScroll() {
                 <
                 div style = { post }
                 className = "infinite-scroll__post_background_img infinite-scroll__post_background_img--portrait"
-                alt = '' > < /div> <
-                /div>
+                alt = '' > < /div> < /
+                div >
             ))
         } <
         div className = "loading"
         ref = { loader } >
         <
-        h2 > Load More < /h2> <
-        /div> <
-        /div> <
-        /div>
+        h2 > Load More < /h2> < /
+        div > <
+        /div> < /
+        div >
     )
 }
