@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.infinite-scroll__container_div {
+  margin: 0 auto;
+}
+
+.infinite-scroll__post_div {
+  width: auto;
+  padding: 5px;
+  background: #383838;
+  margin-top: 8px;
+  border-radius: 14px;
+}
+.infinite-scroll__post_background_img {
+  display: block;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 25vmin;
+  width: 90vw;
+  max-width: 1024px;
+  padding-top: 60vmin;
+  overflow: hidden;
+  border-radius: 14px;
+  filter: blur(2px);
+  margin: auto;
+}
