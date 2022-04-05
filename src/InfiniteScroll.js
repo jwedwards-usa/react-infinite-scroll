@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { getRandomIntInclusive } from './Util'
-import { imageSources } from './ImageSources'
+import { getRandomIntInclusive } from './util'
+import { imageSources } from './imageSources'
 import startImage from './images/start.jpg'
 import secondIntroImage from './images/two.jpg'
 import thridIntroImage from './images/three.jpg'
