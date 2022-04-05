@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { getRandomIntInclusive } from './Util'
-import { imageSources } from './ImageSources'
+import { getRandomIntInclusive } from './util'
+import { imageSources } from './imageSources'
+import MemeCanvas from './memeCanvas'
 import startImage from './images/start.jpg'
 import secondIntroImage from './images/two.jpg'
 import thridIntroImage from './images/three.jpg'
@@ -65,9 +66,19 @@ export function InfiniteScroll() {
         })
     }, [page])
 
+    const meme = {
+        image: startImage,
+        width: 800,
+        height: 400,
+        text: "How Awesome!",
+        reference: "abc 123"
+    }
+
     return ( <
         div className = "infinite-scroll__container_div" >
         <
+        MemeCanvas meme = { meme }
+        /> <
         div className = "post-list" > {
             postList.list.map((post, index) => ( <
                 div key = { index }
@@ -75,16 +86,18 @@ export function InfiniteScroll() {
                 <
                 div style = { post }
                 className = "infinite-scroll__post_background_img infinite-scroll__post_background_img--portrait"
-                alt = '' > < /div> < /
+                alt = '' >
+                <
+                /div> < /
                 div >
             ))
         } <
         div className = "loading"
         ref = { loader } >
         <
-        h2 > Load More < /h2> < /
+        h2 > Load More < /h2>  < /
         div > <
-        /div> < /
+        /div>  < /
         div >
     )
 }
