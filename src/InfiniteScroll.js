@@ -2,8 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 import { getRandomIntInclusive } from './util'
 import { imageSources } from './imageSources'
 import MemeCanvas from './memeCanvas'
+import PapaParse from 'papaparse'
 import startImage from './images/start.jpg'
 import secondIntroImage from './images/two.jpg'
+import memeCsvSource from './data/abide1-en.csv'
 
 const startingMemes = [{
     imgSrc: startImage,
@@ -19,9 +21,22 @@ const startingMemes = [{
     reference: "Your Brother in Christ"
 }]
 
+const memeData = []
+let canScrollMemes = false
+
+function csvReaderStepFn(results, parser) {
+    if (results && (results.data)) {
+        memeData.push(results.data)
+    }
+}
+
+function setEnableInfiniteScrollStart() {
+    canScrollMemes = true
+}
+
 function generateCanvas() {
-    let memeText = ''
-    let memeReference = ''
+    const memeDataIndex = getRandomIntInclusive(0, memeData.length - 1)
+    const [memeText, memeReference] = memeData[memeDataIndex]
     let memeImgSrc = ''
 
     let imgUrlLocator
@@ -51,6 +66,14 @@ export function InfiniteScroll() {
         // add loader reference
     const loader = useRef(null)
 
+    //load meme text from csv
+    PapaParse.parse(memeCsvSource, {
+        download: true,
+        step: csvReaderStepFn,
+        complete: setEnableInfiniteScrollStart(memeData),
+        error: console.log
+    })
+
     // here we handle what happens when user scrolls to Load More div
     // in this case we just update page variable
     //@todo move this inside the useEffect function
@@ -77,6 +100,11 @@ export function InfiniteScroll() {
 
     useEffect(() => {
         setPostList((x) => {
+            if (!canScrollMemes || memeData.length < 5) {
+                return ({
+                    list: x.list,
+                })
+            }
             return ({
                 list: x.list.concat([generateCanvas(), generateCanvas(), generateCanvas(), generateCanvas()]),
             })
