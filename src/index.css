@@ -34,3 +34,11 @@ code {
     filter: blur(2px);
     margin: auto;
 }
+
+.infinite-scroll__post_canvas {
+    display: block;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 14px;
+}

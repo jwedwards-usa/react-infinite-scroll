@@ -4,10 +4,26 @@ import { imageSources } from './imageSources'
 import MemeCanvas from './memeCanvas'
 import startImage from './images/start.jpg'
 import secondIntroImage from './images/two.jpg'
-import thridIntroImage from './images/three.jpg'
-import fourthIntroImage from './images/four.jpg'
+
+const startingMemes = [{
+    imgSrc: startImage,
+    width: 800,
+    height: 400,
+    text: "You will keep him in perfect peace, whose mind is stayed on You, because he trusts in You.",
+    reference: "Isaiah 26:3 (NKJV)"
+}, {
+    imgSrc: secondIntroImage,
+    width: 800,
+    height: 400,
+    text: "Welcome to Dwell. Scroll down and enter into that peace. As you meditate on God",
+    reference: "Your Brother in Christ"
+}]
 
 function generateCanvas() {
+    let memeText = ''
+    let memeReference = ''
+    let memeImgSrc = ''
+
     let imgUrlLocator
     const imageSourceId = 0
     const imgSource = imageSources[imageSourceId]
@@ -15,19 +31,20 @@ function generateCanvas() {
         imgSource.ignore.includes(imgUrlLocator)) {
         imgUrlLocator = getRandomIntInclusive(imgSource.minRandom, imgSource.maxRandom)
     }
+    memeImgSrc = imgSource.urlPrefix + imgUrlLocator + imgSource.urlPostFix
+
     return {
-        background: '#333 url(' + imgSource.urlPrefix + imgUrlLocator + imgSource.urlPostFix + ') no-repeat center'
+        imgSrc: memeImgSrc,
+        width: imgSource.imgWidth,
+        height: imgSource.imgHeight,
+        text: memeText,
+        reference: memeReference
     }
 }
 
 export function InfiniteScroll() {
     const [postList, setPostList] = useState({
-            list: [
-                { background: '#333 url(' + startImage + ') no-repeat center' },
-                { background: '#333 url(' + secondIntroImage + ') no-repeat center' },
-                { background: '#333 url(' + thridIntroImage + ') no-repeat center' },
-                { background: '#333 url(' + fourthIntroImage + ') no-repeat center' }
-            ]
+            list: startingMemes
         })
         // tracking on which page we currently are
     const [page, setPage] = useState(1)
@@ -66,29 +83,28 @@ export function InfiniteScroll() {
         })
     }, [page])
 
-    const meme = {
-        image: startImage,
-        width: 800,
-        height: 400,
-        text: "How Awesome!",
-        reference: "abc 123"
-    }
+
 
     return ( <
         div className = "infinite-scroll__container_div" >
         <
-        MemeCanvas meme = { meme }
-        /> <
         div className = "post-list" > {
             postList.list.map((post, index) => ( <
                 div key = { index }
                 className = "infinite-scroll__post_div" >
                 <
-                div style = { post }
-                className = "infinite-scroll__post_background_img infinite-scroll__post_background_img--portrait"
-                alt = '' >
+                div alt = '' >
                 <
-                /div> < /
+                MemeCanvas text = { post.text }
+                reference = { post.reference }
+                imgSrc = { post.imgSrc }
+                imgWidth = { 900 }
+                imgHeight = { 400 }
+                className = "infinite-scroll__post_canvas" /
+                >
+                <
+                /
+                div > < /
                 div >
             ))
         } <

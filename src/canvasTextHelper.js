@@ -38,35 +38,20 @@ function wordsArray(text) {
     }
 }
 
-// Adapted from https://gitlab.com/davideblasutto/canvas-multiline-text
-function drawMultilineText(ctx, text, opts) {
-    // Defaults
-    if (!opts) { opts = {} }
-    if (!opts.font) { opts.font = 'sans-serif' }
-    if (typeof opts.stroke === 'undefined') { opts.stroke = false }
-    if (typeof opts.verbose === 'undefined') { opts.verbose = false }
-    if (!opts.rect) {
-        opts.rect = {
-            x: 0,
-            y: 0,
-            width: ctx.canvas.width,
-            height: ctx.canvas.height
-        }
-    }
-    if (!opts.lineHeight) { opts.lineHeight = 1.1 }
-    if (!opts.minFontSize) { opts.minFontSize = 12 }
-    if (!opts.maxFontSize) { opts.maxFontSize = 48 }
+function lineEndsWithPuncuation(line) {
+    return line.endsWith('! ') ||
+        line.endsWith('. ') ||
+        line.endsWith(', ') ||
+        line.endsWith(': ') ||
+        line.endsWith('; ')
+}
 
-    // Default log function is console.log - Note: if verbose=false, nothing will be logged
-    if (!opts.logFunction) { opts.logFunction = function(message) { console.log(message) } }
-
-    const words = wordsArray(text)
-    if (opts.verbose) opts.logFunction('Text contains ' + words.length + ' words')
+function splitSentenceToFitMaxOnFirstLines(ctx, words, opts) {
     let lines = []
 
     // Finds max font size  which can be used to print whole text in opts.rec
-    let fontSize = opts.minFontSize
-    for (; fontSize <= opts.maxFontSize; fontSize++) {
+    let fontSize = opts.maxFontSize
+    for (; fontSize >= opts.minFontSize; fontSize--) {
         const lineHeight = fontSize * opts.lineHeight
 
         // Set font for testing with measureText()
@@ -86,6 +71,12 @@ function drawMultilineText(ctx, text, opts) {
                     // New line with ctx last word
                 line = word + ' '
                 y += lineHeight
+            } else if (lineEndsWithPuncuation(line) && linePlus.length > 50) {
+                // ..."prints" (save) the line without last word
+                lines.push({ text: line, x: x, y: y })
+                    // New line with ctx last word
+                line = word + ' '
+                y += lineHeight
             } else {
                 // ...continue appending words
                 line = linePlus
@@ -95,19 +86,67 @@ function drawMultilineText(ctx, text, opts) {
         lines.push({ text: line, x: x, y: y })
 
         // If bottom of rect is reached then break
-        if (y > opts.rect.height) { break }
+        if (opts.verbose) opts.logFunction('y=' + y + '  rect.height=' + (opts.rect.height + opts.rect.y) + ' fontSize=' + fontSize)
+        if (y <= (opts.rect.height + opts.rect.y)) { break }
     }
+    return lines
+}
+
+// Adapted from https://gitlab.com/davideblasutto/canvas-multiline-text
+function drawMultilineText(ctx, text, opts) {
+    // Defaults
+    if (!opts) { opts = {} }
+    if (!opts.font) { opts.font = 'sans-serif' }
+    if (typeof opts.alignment === 'undefined') { opts.alignment = 'center' }
+    if (typeof opts.stroke === 'undefined') { opts.stroke = false }
+    if (typeof opts.verbose === 'undefined') { opts.verbose = false }
+    if (!opts.rect) {
+        opts.rect = {
+            x: 0,
+            y: 0,
+            width: ctx.canvas.width,
+            height: ctx.canvas.height
+        }
+    }
+    if (!opts.lineHeight) { opts.lineHeight = 1.1 }
+    if (!opts.minFontSize) { opts.minFontSize = 12 }
+    if (!opts.maxFontSize) { opts.maxFontSize = 48 }
+
+    // Default log function is console.log - Note: if verbose=false, nothing will be logged
+    if (!opts.logFunction) { opts.logFunction = function(message) { console.log(message) } }
+
+    const words = wordsArray(text)
+    if (opts.verbose) opts.logFunction('Text contains ' + words.length + ' words')
+
+    let lines = splitSentenceToFitMaxOnFirstLines(ctx, words, opts)
 
     if (opts.verbose) opts.logFunction('Font used: ' + ctx.font)
 
+    let bottomPixelofBottomLine = 0
+    let maxWidth = 0
     for (const line of lines) {
-        if (opts.stroke) {
-            ctx.strokeText(line.text.trim(), line.x, line.y)
+        let textString = line.text.trim()
+        let measureText = ctx.measureText(textString)
+        bottomPixelofBottomLine = line.y + measureText.fontBoundingBoxDescent
+        maxWidth = Math.max(maxWidth, measureText.width)
+        let x = 0
+        if (opts.alignment === 'left') {
+            x = line.x
+        } else if (opts.alignment === 'right') {
+            x = line.x + opts.rect.width - measureText.width
         } else {
-            ctx.fillText(line.text.trim(), line.x, line.y)
+            x = (ctx.canvas.width / 2) - (measureText.width / 2)
+        }
+        if (opts.stroke) {
+            ctx.strokeText(textString, x, line.y)
+        } else {
+            ctx.fillText(textString, x, line.y)
         }
     }
-    return fontSize
+    return {
+        'maxWidth': maxWidth,
+        'bottomPixelofBottomLine': bottomPixelofBottomLine
+    }
 }
 
 export { drawMultilineText }
