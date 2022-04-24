@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/react-infinite-scroll/static/css/main.fb139d09.css",
-    "main.js": "/react-infinite-scroll/static/js/main.2fa0fa4d.js",
+    "main.js": "/react-infinite-scroll/static/js/main.e6beb58b.js",
     "static/js/787.fbef6b5f.chunk.js": "/react-infinite-scroll/static/js/787.fbef6b5f.chunk.js",
     "static/media/start.jpg": "/react-infinite-scroll/static/media/start.119eb76d06c2a2ba0ffa.jpg",
     "static/media/two.jpg": "/react-infinite-scroll/static/media/two.7d24bda70e380092fafa.jpg",
     "static/media/abide1-en.csv": "/react-infinite-scroll/static/media/abide1-en.f0644eb77a06bacb3a36.csv",
     "index.html": "/react-infinite-scroll/index.html",
     "main.fb139d09.css.map": "/react-infinite-scroll/static/css/main.fb139d09.css.map",
-    "main.2fa0fa4d.js.map": "/react-infinite-scroll/static/js/main.2fa0fa4d.js.map",
+    "main.e6beb58b.js.map": "/react-infinite-scroll/static/js/main.e6beb58b.js.map",
     "787.fbef6b5f.chunk.js.map": "/react-infinite-scroll/static/js/787.fbef6b5f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fb139d09.css",
-    "static/js/main.2fa0fa4d.js"
+    "static/js/main.e6beb58b.js"
   ]
 }
