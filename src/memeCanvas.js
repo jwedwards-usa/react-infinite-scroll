@@ -61,6 +61,9 @@ export default class MemeCanvas extends Component {
 
     updateCanvas() {
         const canvas = this.canvasRef.current
+        if (canvas === null) {
+            return
+        }
         const ctx = canvas.getContext("2d")
 
         const memeText = this.props.text
@@ -117,7 +120,7 @@ export default class MemeCanvas extends Component {
                 minFontSize: 2,
                 maxFontSize: 28
             })
-            console.log(`bottomPixelofBottomLine: ${textRhsBounds.bottomPixelofBottomLine}`)
+
             if (typeof memeReference !== 'undefined') {
                 // Rectangle for reference text debugging
                 //ctx.strokeRect(textLeftOffest, textRhsBounds.bottomPixelofBottomLine + 3, Math.min(textWidth, textRhsBounds.maxWidth + (textWidth / 2)), textHeight / 4)
