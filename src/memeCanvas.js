@@ -99,13 +99,12 @@ export default class MemeCanvas extends Component {
 
             StackBlur.canvasRGBA(canvas, 0, 0, canvas.width, canvas.height, 2)
 
-            // Rectangle for color debugging
-            //ctx.strokeRect(0, 90, canvas.width, canvas.height - 175)
-            const textColor = determineTextColor(canvas, 90, canvas.height - 175)
+            const imgData = ctx.getImageData(textLeftOffest, textTopOffset, textWidth, textHeight)
+            const textColor = determineTextColor(imgData)
             ctx.fillStyle = `rgb(${textColor.r},${textColor.g},${textColor.b})` //  '#ffffff'
             ctx.strokeStyle = `rgb(${textColor.r},${textColor.g},${textColor.b})` //   '#ffffff'
 
-            // Rectangle for text debugging
+            // Rectangle for text and color debugging
             //ctx.strokeRect(textLeftOffest, textTopOffset, textWidth, textHeight)
             let textRhsBounds = drawMultilineText(ctx, memeText, {
                 rect: {

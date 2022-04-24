@@ -1,13 +1,13 @@
-function determineTextColor(imageElement, txtStartY, heightOffest) {
-    // Create the canavs element
-    const tmpCanvas =
-        document.createElement('canvas')
+function findContrastingColor(colorVal, minRgb, maxRgb) {
+    console.log(`colorVal ${colorVal},${minRgb},${maxRgb})`)
+    let sum = minRgb + maxRgb - colorVal
+    if (sum > 255 || sum <= 0) {
+        // return 255
+    }
+    return sum
+}
 
-    // Get the 2D context of the canvas
-    const tmpCtx =
-        tmpCanvas.getContext &&
-        tmpCanvas.getContext('2d')
-
+function determineTextColor(imgData) {
     // Define variables for storing
     // the individual red, blue and
     // green colors
@@ -16,25 +16,6 @@ function determineTextColor(imageElement, txtStartY, heightOffest) {
     // Define variable for the
     // total number of colors
     let count = 0
-
-    // Set the height and width equal
-    // to that of the canvas and the image
-    const width = tmpCanvas.width =
-        imageElement.naturalWidth ||
-        imageElement.offsetWidth ||
-        imageElement.width
-
-    const height = tmpCanvas.height =
-        imageElement.naturalHeight ||
-        imageElement.offsetHeight ||
-        imageElement.height
-
-    // Draw the image to the canvas
-    tmpCtx.drawImage(imageElement, 0, 0)
-
-    // Get the data of the image
-    const imgData = tmpCtx.getImageData(
-        0, txtStartY, width, height - heightOffest)
 
     // Get the length of image data object
     const length = imgData.data.length
@@ -54,22 +35,18 @@ function determineTextColor(imageElement, txtStartY, heightOffest) {
         count++
     }
 
-    // Find the average of rgb
-    rgb.r = Math.floor(rgb.r / count)
-    rgb.g = Math.floor(rgb.g / count)
-    rgb.b = Math.floor(rgb.b / count)
+    //Find the min
+    let minRgb = Math.min(rgb.r, rgb.g, rgb.b);
 
-    // console.log(`before color is ${rgb.r},${rgb.g},${rgb.b})`)
-    if (rgb.r > 160 || rgb.g > 160 || rgb.b > 160) {
-        rgb.r = 30
-        rgb.g = 30
-        rgb.b = 30
-    } else {
-        rgb.r = 235
-        rgb.g = 235
-        rgb.b = 235
-    }
-    // console.log(`after color is ${rgb.r},${rgb.g},${rgb.b})`)
+    //Find the max
+    let maxRgb = Math.max(rgb.r, rgb.g, rgb.b);
+
+    // Find the contrast rgb
+    rgb.r = findContrastingColor(rgb.r, minRgb, maxRgb)
+    rgb.g = findContrastingColor(rgb.g, minRgb, maxRgb)
+    rgb.b = findContrastingColor(rgb.b, minRgb, maxRgb)
+
+    console.log(`after color is ${rgb.r},${rgb.g},${rgb.b})`)
     return rgb
 }
 
