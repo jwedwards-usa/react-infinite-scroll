@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/react-infinite-scroll/static/css/main.fb139d09.css",
-    "main.js": "/react-infinite-scroll/static/js/main.ea4ccdd5.js",
+    "main.js": "/react-infinite-scroll/static/js/main.33520484.js",
     "static/js/787.fbef6b5f.chunk.js": "/react-infinite-scroll/static/js/787.fbef6b5f.chunk.js",
     "static/media/start.jpg": "/react-infinite-scroll/static/media/start.119eb76d06c2a2ba0ffa.jpg",
     "static/media/two.jpg": "/react-infinite-scroll/static/media/two.7d24bda70e380092fafa.jpg",
-    "static/media/dwell-1-en.csv": "/react-infinite-scroll/static/media/dwell-1-en.d380d7545033647e936c.csv",
+    "static/media/dwell-1-en.csv": "/react-infinite-scroll/static/media/dwell-1-en.5f0df56f81864e817bb1.csv",
     "index.html": "/react-infinite-scroll/index.html",
     "main.fb139d09.css.map": "/react-infinite-scroll/static/css/main.fb139d09.css.map",
-    "main.ea4ccdd5.js.map": "/react-infinite-scroll/static/js/main.ea4ccdd5.js.map",
+    "main.33520484.js.map": "/react-infinite-scroll/static/js/main.33520484.js.map",
     "787.fbef6b5f.chunk.js.map": "/react-infinite-scroll/static/js/787.fbef6b5f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fb139d09.css",
-    "static/js/main.ea4ccdd5.js"
+    "static/js/main.33520484.js"
   ]
 }
