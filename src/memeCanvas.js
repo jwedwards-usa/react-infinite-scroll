@@ -30,12 +30,22 @@ export default class MemeCanvas extends Component {
 
     calculateImgWidth() {
         const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-        return 0.9 * vw
+        const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+        if (vh > vw) {
+            return 0.9 * vw
+        }
+        return vh
     }
 
     calculateImgHeight() {
+        const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
         const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-        return 0.4 * vh
+
+        if (vh > vw) {
+            return 0.4 * vh
+        }
+        return 0.8 * vh
     }
 
     calculateTextWidth() {
@@ -98,11 +108,18 @@ export default class MemeCanvas extends Component {
                 centerShift_x, centerShift_y, img.width * ratio, img.height * ratio)
 
             StackBlur.canvasRGBA(canvas, 0, 0, canvas.width, canvas.height, 2)
+            var grd = ctx.createLinearGradient(textLeftOffest, textTopOffset, textWidth, textHeight)
+            grd.addColorStop(0, 'rgba(0, 0, 0, 0.35)')
+            grd.addColorStop(1, 'rgba(0, 0, 0, 0.35)')
+            ctx.fillStyle = grd
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
+            ctx.restore()
+            ctx.fillStyle = '#ffffff'
 
-            const imgData = ctx.getImageData(textLeftOffest, textTopOffset, textWidth, textHeight)
-            const textColor = determineTextColor(imgData)
-            ctx.fillStyle = `rgb(${textColor.r},${textColor.g},${textColor.b})` //  '#ffffff'
-            ctx.strokeStyle = `rgb(${textColor.r},${textColor.g},${textColor.b})` //   '#ffffff'
+            //const imgData = ctx.getImageData(textLeftOffest, textTopOffset, textWidth, textHeight)
+            const textColor = '#ffffff' //determineTextColor(imgData)
+            ctx.fillStyle = `rgb(${textColor.r},${textColor.g},${textColor.b})`
+            ctx.strokeStyle = `rgb(${textColor.r},${textColor.g},${textColor.b})`
 
             // Rectangle for text and color debugging
             //ctx.strokeRect(textLeftOffest, textTopOffset, textWidth, textHeight)
