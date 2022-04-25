@@ -1,3 +1,43 @@
+// HSL (1978) = H: Hue / S: Saturation / L: Lightness
+function getHslFromRgb(o) { // { H: 0-360, S: 0-100, L: 0-100 }
+    var H = o.H / 360,
+        S = o.S / 100,
+        L = o.L / 100,
+        R, G, B, _1, _2
+
+    function HueToRgb(v1, v2, vH) {
+        if (vH < 0) vH += 1
+        if (vH > 1) vH -= 1
+        if ((6 * vH) < 1) return v1 + (v2 - v1) * 6 * vH
+        if ((2 * vH) < 1) return v2
+        if ((3 * vH) < 2) return v1 + (v2 - v1) * ((2 / 3) - vH) * 6
+        return v1
+    }
+
+    if (S == 0) { // HSL from 0 to 1
+        R = L * 255
+        G = L * 255
+        B = L * 255
+    } else {
+        if (L < 0.5) {
+            _2 = L * (1 + S)
+        } else {
+            _2 = (L + S) - (S * L)
+        }
+        _1 = 2 * L - _2
+
+        R = 255 * HueToRgb(_1, _2, H + (1 / 3))
+        G = 255 * HueToRgb(_1, _2, H)
+        B = 255 * HueToRgb(_1, _2, H - (1 / 3))
+    }
+
+    return {
+        R: R,
+        G: G,
+        B: B
+    }
+}
+
 function findContrastingColor(colorVal, minRgb, maxRgb) {
     //console.log(`colorVal ${colorVal},${minRgb},${maxRgb}`)
     let sum = minRgb + maxRgb - colorVal
