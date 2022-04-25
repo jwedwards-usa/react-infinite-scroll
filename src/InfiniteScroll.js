@@ -5,7 +5,7 @@ import MemeCanvas from './memeCanvas'
 import PapaParse from 'papaparse'
 import startImage from './images/start.jpg'
 import secondIntroImage from './images/two.jpg'
-import memeCsvSource from './data/abide1-en.csv'
+import memeCsvSource from './data/dwell-1-en.csv'
 
 const startingMemes = [{
     imgSrc: startImage,
