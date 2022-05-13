@@ -126,8 +126,6 @@ export function InfiniteScroll() {
                 MemeCanvas text = { post.text }
                 reference = { post.reference }
                 imgSrc = { post.imgSrc }
-                imgWidth = { 900 }
-                imgHeight = { 400 }
                 className = "infinite-scroll__post_canvas" /
                 >
                 <
