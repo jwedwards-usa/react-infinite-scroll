@@ -138,7 +138,13 @@ function drawMultilineText(ctx, text, opts) {
             x = (ctx.canvas.width / 2) - (measureText.width / 2)
         }
         if (opts.stroke) {
+            ctx.lineWidth = 1
+            ctx.shadowBlur = 5
             ctx.strokeText(textString, x, line.y)
+            ctx.shadowBlur = 0
+            ctx.fillText(textString, x, line.y)
+            ctx.fill()
+            ctx.stroke()
         } else {
             ctx.fillText(textString, x, line.y)
         }

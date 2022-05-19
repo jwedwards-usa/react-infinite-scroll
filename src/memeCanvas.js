@@ -178,12 +178,13 @@ export default class MemeCanvas extends Component {
         ctx.fillStyle = grd
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         ctx.restore()
-        ctx.fillStyle = '#ffffff'
 
         //const imgData = ctx.getImageData(textLeftOffest, textTopOffset, textWidth, textHeight)
-        const textColor = '#ffffff' //determineTextColor(imgData)
-        ctx.fillStyle = `rgb(${textColor.r},${textColor.g},${textColor.b})`
-        ctx.strokeStyle = `rgb(${textColor.r},${textColor.g},${textColor.b})`
+        //const textColor = determineTextColor(imgData) //'#ffffff'
+
+        ctx.shadowColor = '#000000'
+        ctx.fillStyle = '#ffffff'
+        ctx.strokeStyle = '#000000'
 
         //force foreground
         ctx.globalCompositeOperation = 'source-over'
@@ -201,7 +202,8 @@ export default class MemeCanvas extends Component {
             verbose: false,
             lineHeight: 1.2,
             minFontSize: 2,
-            maxFontSize: 28
+            maxFontSize: 28,
+            stroke: true
         })
 
         if (typeof memeReference !== 'undefined') {
@@ -220,7 +222,8 @@ export default class MemeCanvas extends Component {
                 lineHeight: 1.2,
                 minFontSize: 2,
                 maxFontSize: 16,
-                alignment: 'right'
+                alignment: 'right',
+                stroke: true
             })
         }
         ctx.restore()
