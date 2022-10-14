@@ -6,8 +6,8 @@ function App() {
         div className = "App" >
         <
         header className = "App-header" > { InfiniteScroll() } <
-        /header> <
-        /div>
+        /header> < /
+        div >
     );
 }
 
